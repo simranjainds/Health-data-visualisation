@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="interactive">
+  <!-- this div contains two svg in which we will have two elements of the graph -->
+  <!-- svg with id graph contains the treemap -->
+  <svg id="graph">
+
+
+  </svg>
+  <!-- svg with id legend contains the list of the regions and shows the colour which represents them -->
+
+  <svg id='legend' width="300" height="500">
+    <!--creating different groups in svg and each group will represent each region -->
+    <!-- passing the x and y coordinates for rectangle and a colour to fill it ,later adding text beside the rectangle -->
+    <g>
+      <rect class="legend-item" x="10" y="0" width="40" height="40" fill="#402D54"></rect>
+      <text x="60" y="20" fill="black">African Region</text>
+    </g>
+    <g>
+      <rect class="legend-item" x="10" y="40" width="40" height="40" fill="#D18975"></rect>
+      <text x="60" y="60" fill="black">Region of the Americas</text>
+    </g>
+    <g>
+      <rect class="legend-item" x="10" y="80" width="40" height="40" fill="#8FD175"></rect>
+      <text x="60" y="100" fill="black">South-East Asia Region</text>
+    </g>
+    <g>
+      <rect class="legend-item" x="10" y="120" width="40" height="40" fill="#69a3b2"></rect>
+      <text x="60" y="140" fill="black">European Region</text>
+    </g>
+    <g>
+      <rect class="legend-item" x="10" y="160" width="40" height="40" fill="#69b3a2"></rect>
+
+      <text x="60" y="180" fill="black">Eastern Mediterranean Region</text>
+    </g>
+    <g>
+      <rect class="legend-item" x="10" y="200" width="40" height="40" fill="steelblue"></rect>
+      <text x="60" y="220" fill="black">Western Pacific Region</text>
+    </g>
+
+  </svg>
+</div>
+<!-- creating a different division for the tooltip  -->
+<div id='tooltip'></div>
+
+<!-- adding different specification and styling features for each id -->
+<style>
+  #legend {
+    min-height: 300px;
+  }
+
+  #tooltip {
+
+    height: auto;
+    width: auto;
+
+    color: white;
+    padding: 5px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .7);
+    border-radius: 5px;
+    box-shadow: 0 0 3px gray
+  }
+</style>
+
+
+
+
+<script>
+
+  // set the dimensions and margins of the graph
+  var margin = { top: 80, right: 10, bottom: 10, left: 10 },
+    width = 1200 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page and pass the id of the graph element
+  var svg = d3.select("#graph")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");   //translating the svg as per our need
+
+  // read json data
+  d3.json("projectfile.json", function (data) {
+
+
+    //creating a variable to select our tooltip id 
+    let tooltip = d3.select('#tooltip')
+
+    // Give the data to this cluster layout:
+    var root = d3.hierarchy(data)
+      .sum(function (d) { return d.value }) // Here the size of each leave is given in the 'value' field in input data
+      .sort(function (node1, node2) {                  //function will return the node with the highest value
+        return node2['value'] - node1['value']
+      })
+    // Then d3.treemap computes the position of each element of the hierarchy
+
+    let map = d3.treemap()
+      .size([width, height])
+      .paddingTop(34)
+      .paddingRight(1)
+      .paddingInner(1)      // Padding between each rectangle
+      .paddingOuter(6)
+      .padding(3)
+      (root)
+
+
+    // prepare a color scale same as we have given in our other svg element
+    var color = d3.scaleOrdinal()
+      .domain(["African Region", "Region of the Americas", "South-East Asia Region", "European Region", "Eastern Mediterranean Region", "Western Pacific Region"])
+      .range(["#402D54", "#D18975", "#8FD175", "#69a3b2", "#69b3a2", d3.color("steelblue")])
+
+    // And a opacity scale
+    var opacity = d3.scaleLinear()
+      .domain([10, 30])
+      .range([0.5, 1])
+
+    // use this information to add rectangles:
+    svg
+      .selectAll("rect")
+      .data(root.leaves())                        //to pass the data present in the root node of hierarchy
+      .enter()
+      .append("rect")
+      .attr('x', function (d) { return d.x0; })       //passing x0 and y0 according to the sorted values
+      .attr('y', function (d) { return d.y0; })
+      .attr('width', function (d) { return d.x1 - d.x0; })    //x1-x0 gives us the width of the recatngle width 
+      .attr('height', function (d) { return d.y1 - d.y0; })    //y1-y0 gives us the width of the recatngle height
+      .style("stroke", "black")
+      .style("fill", function (d) { return color(d.parent.data.name) })     //filling the rectangle according to the regions
+      .style("opacity", function (d) { return opacity(d.data.value) })       //opacity of the colour will depend on the value
+      .on('mouseover', function (d) {
+        tooltip.transition()                                         //creating a function suvh that on mouseover it will display (region name , reason of mortality and value)
+          .style('visibility', 'visible')
+          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('top', (d3.event.pageY - 10) + 'px')
+        let description = d['data']                  //creating a variable to store data
+
+        tooltip.html(
+          "Region: " +                             //giving data to the tooltip rectangle
+          d.data.region
+          + "<br>" +
+          "Category: " +
+          d.data.disease +
+          "<br>" +
+          "Value: " +
+          d.data.value
+        )
+
+      })
+      .on('mouseout', function (d) {                        // hidding the information on mouse over
+        tooltip.transition()
+          .style('visibility', 'hidden')
+        d3.selectAll('rect').style('opacity', 1)
+      })
+    // and to add the text labels
+    svg
+      .selectAll("text")
+      .data(root.leaves())
+      .enter()
+      .append("text")
+      .selectAll('tspan')                    //adding tspan in order to split the data
+      .data(d => {
+        return d.data.disease_name.split(/(?=[A-Z][^A-Z])/g)     //splitting the data based on the capital letters particulary
+          .map(v => {
+            return {                    //creating a function to map text ,x and y co-ordinates
+              text: v,
+              x0: d.x0,
+              y0: d.y0
+            }
+          })
+        console.log(d.text);
+      })
+      .enter().append('tspan')
+      .attr("x", function (d) { return d.x0 + 5 })    // +5 to adjust position (more right)
+      .attr("y", function (d, i) { return d.y0 + 25 + (i * 15) })    // +25 to adjust position (lower) and to give position to splited text
+      .text((d) => d.text)
+
+      .attr("font-size", "12px")
+      .attr("fill", "white")
+    // and to add the text labels
+    svg
+      .selectAll("vals")
+      .data(root.leaves())
+      .enter()
+      .append("text")
+      .attr("x", function (d) { return d.x0 + 5 })    // +5 to adjust position (more right)
+      .attr("y", function (d) { return d.y0 + 12 })    // +12 to adjust position (lower)
+      .text(function (d) { return d.data.value })
+      .attr("font-size", "12px")
+      .attr("fill", "white")
+
+    // Add title for the 6 groups
+    svg
+      .append("text")
+      .attr("x", 200)
+      .attr("y", -20)    // -20 to adjust position (above)
+      .style("text-decoration", "underline")
+      .text("Mortality rate of WHO regions based on different factors")
+      .attr("font-size", "30px")
+      .attr("fill", "black");
+
+
+
+  })
+</script>

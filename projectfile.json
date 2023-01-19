@@ -1,0 +1,179 @@
+{
+   "name": "WHO REGIONS",
+   "children": [{
+       "name": "African Region",
+       "children": [ {
+         "disease": "New HIV infections(per 100 000 population)",
+         "value": 940,
+         "region" : "African Region",
+         "disease_name":"Hiv Infections"
+      },
+      {
+         "disease": "Tuberculosis incidence(per 100 000 population)",
+         "value": 226,
+         "region" : "African Region",
+         "disease_name":"Tuberculosis Incidence"
+      },
+      {
+         "disease": "Malaria incidence(per 1000 population at risk)",
+         "value": 225,
+         "region" : "African Region",
+         "disease_name":"Malaria Incidence"
+      },
+      {
+         "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+         "value": 20.8,
+         "region" : "African Region",
+         "disease_name":" "
+      }
+   ]
+},
+{
+   "name": "Region of the Americas",
+   "children": [{
+      
+         "disease": "New HIV infections(per 100 000 population)",
+         "value": 170,
+         "region" : "Region of the Americas",
+         "disease_name":"Hiv Infections"
+      },
+      {
+         "disease": "Tuberculosis incidence(per 100 000 population)",
+         "value": 226,
+         "region" : "Region of the Americas",
+         "disease_name":"Tuberculosis Incidence"
+      },
+      {
+         "disease": "Malaria incidence(per 1000 population at risk)",
+         "value": 225,
+         "region" : "Region of the Americas",
+         "disease_name":"Malaria Incidence"
+      },
+      {
+         "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+         "value": 20.8,
+         "region" : "Region of the Americas",
+         "disease_name":" "
+      }
+   ]
+},
+
+{
+   "name": "South-East Asia Region",
+   "children": [{
+      "disease": "New HIV infections(per 100 000 population)",
+      "value": 80,
+      "region" : "South-East Asia Region",
+      "disease_name":"Hiv Infections"
+   },
+   {
+      "disease": "Tuberculosis incidence(per 100 000 population)",
+      "value": 217,
+      "region" : "South-East Asia Region",
+      "disease_name":"Tuberculosis Incidence"
+   },
+   {
+      "disease": "Malaria incidence(per 1000 population at risk)",
+      "value": 330,
+      "region" : "South-East Asia Region",
+      "disease_name":"Malaria Incidence"
+   },
+   {
+      "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+      "value": 21.6,
+      "region" : "South-East Asia Region",
+      "disease_name":" "
+   }
+   ]
+},
+{
+   "name": "European Region",
+   "children": [ {
+      "disease": "New HIV infections(per 100 000 population)",
+      "value": 210,
+      "region" : "European Region",
+      "disease_name":"Hiv Infections"
+   },
+   {
+      "disease": "Tuberculosis incidence(per 100 000 population)",
+      "value": 26,
+      "region" : "European Region",
+      "disease_name":"Tuberculosis Incidence"
+   },
+   {
+      "disease": "Malaria incidence(per 1000 population at risk)",
+      "value": 220,
+      "region" : "European Region",
+      "disease_name":"Malaria Incidence"
+   },
+   {
+      "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+      "value": 16.3,
+      "region" : "European Region",
+      "disease_name":" "
+   }
+   ]
+},
+{
+   "name": "Eastern Mediterranean Region",
+   "children": [ {
+      "disease": "New HIV infections(per 100 000 population)",
+      "value": 70,
+      "region" : "Eastern Mediterranean Region",
+      "disease_name":"Hiv Infections"
+   },
+   {
+      "disease": "Tuberculosis Incidence(per 100 000 population)",
+      "value": 114,
+      "region" : "Eastern Mediterranean Region",
+      "disease_name":"Tuberculosis Incidence"
+   },
+   {
+      "disease": "Malaria incidence(per 1000 population at risk)",
+      "value": 104,
+      "region" : "Eastern Mediterranean Region",
+      "disease_name":"Malaria Incidence"
+   },
+   {
+      "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+      "value": 24.5,
+      "region" : "Eastern Mediterranean Region",
+      "disease_name":" "
+   }
+   ]
+},
+{
+   "name": "Western Pacific Region",
+   "children": [{
+      "disease": "New HIV infections(per 100 000 population)",
+      "value": 60,
+      "region" : "Western Pacific Region",
+      "disease_name":"Hiv Infections"
+   },
+   {
+      "disease": "Tuberculosis incidence(per 100 000 population)",
+      "value": 93,
+      "region" : "Western Pacific Region",
+      "disease_name":"Tuberculosis Incidence"
+   },
+   {
+      "disease": "Malaria incidence(per 1000 population at risk)",
+      "value": 230,
+      "region" : "Western Pacific Region",
+      "disease_name":"Malaria Incidence"
+   },
+   {
+      "disease": "Probability of dying from any of cancer, diabetes, CRD between age 30 and exact age 70(%)",
+      "value": 15.6,
+      "region" : "Western Pacific Region",
+      "disease_name":" "
+   }
+   ]
+}
+
+   ]
+}
+
+
+    
+   
